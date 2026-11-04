@@ -1,102 +1,104 @@
-## 🐍 Snake Game Player (Embedded System Project)
+# Snake Game Player — LPC2124 Embedded Systems Project
 
-An embedded-system implementation of the classic **Snake Game**, developed using **C programming** on the **LPC2124 (ARM7) microcontroller**, featuring real-time input via keypad and graphical output on an LCD display.
+**Embedded C · ARM7 Microcontroller · Keil µVision · Proteus**
 
----
+This repository documents a **Snake Game embedded-systems course project** prepared at **Hubei University of Technology**. The work combines an LPC2124 microcontroller program with keypad input, graphical LCD output, and circuit setup and simulation work in **Proteus**.
 
-## 📌 Project Overview
+The repository includes the Keil project, embedded C source and support files, a generated HEX image, and the academic project report.
 
-This project was developed as part of the **Embedded System Course Design** at **Hubei University of Technology**.
-The game demonstrates core embedded concepts such as **hardware–software integration**, **data structures**, and **real-time control**.
+## Project Overview
 
-The snake movement and body management are implemented using a **doubly linked list**, ensuring efficient updates during gameplay.
+The application implements the core Snake Game loop for a microcontroller-based display:
 
----
+- Read directional input using a matrix-keypad scanning routine
+- Update snake position and direction
+- Draw the snake and food on a graphical LCD
+- Generate food positions and grow the snake after a food collision
+- Check for collisions with the snake's body
+- Wrap the snake to the opposite side when it crosses a screen boundary
 
-## ⚙️ Hardware Requirements
+The source represents the snake as an **array of positions** (`struct Snake snake[1000]`), rather than a doubly linked list. The program uses low-level GPIO access and display-driver functions suitable for the LPC2124 target.
 
-* **Microcontroller:** LPC2124 (ARM7TDMI-S)
-* **Display:** LM3228 (128×64 Graphic LCD)
-* **Input Device:** 4×4 Matrix Keypad
-* **Power Supply:** 5V
-* **Other Components:** 10K Resistors
+## Hardware and Software
 
----
+| Component | Description |
+| --- | --- |
+| Microcontroller | NXP LPC2124, ARM7TDMI family |
+| Input | 4×4 matrix keypad, handled through GPIO scanning |
+| Output | Graphical LCD with supporting driver code |
+| Programming language | Embedded C, with ARM startup assembly |
+| Development environment | Keil µVision / MDK-ARM |
+| Circuit setup | Proteus simulation environment |
+| Output artifact | `Snake Game/Objects/Snake_Game.hex` |
 
-## 💻 Software & Tools
+**Display note:** The driver source refers to a T6963C-based graphical LCD module. The exact Proteus display part and circuit wiring are not provided as project files in this repository.
 
-* **Programming Language:** C
-* **IDE / Toolchain:** Keil µVision
-* **Simulation:** Proteus
-* **Architecture:** ARM7TDMI
+## Proteus Setup and Simulation
 
----
+Proteus was used during the coursework for the **microcontroller circuit setup and integration work**, alongside the C program developed in Keil. The setup involved configuring the LPC2124-based circuit and its display/keypad connections for the Snake Game demonstration.
 
-## 🎮 Game Features
+The accompanying report provides academic documentation of the project. **The Proteus schematic or project file is not currently included in the repository**, so the original circuit cannot be opened directly from GitHub.
 
-* Classic snake movement (Up, Down, Left, Right)
-* Boundary wrapping logic
-* Random food generation
-* Snake body growth on food consumption
-* Collision detection (self & boundary)
-* Efficient snake management using **Doubly Linked List**
-* Real-time keypad control
-* LCD-based graphical rendering
+For a compatible Proteus recreation, the general workflow is:
 
----
+1. Create an LPC2124-based circuit with compatible keypad and graphical LCD components.
+2. Connect the peripherals according to the GPIO mapping expected by the source and LCD driver.
+3. Configure the microcontroller with the generated HEX image.
+4. Run the simulation and check the keypad response and game display.
 
-## 🧠 Key Concepts Used
+These are general reconstruction steps, **not a verified pin-by-pin wiring guide**. An original Proteus design file or clear circuit screenshot would be needed for exact reproduction.
 
-* Embedded C programming
-* GPIO & peripheral control
-* Doubly linked list data structure
-* Real-time input handling
-* LCD graphics rendering
-* Memory management
+## Repository Structure
 
----
-
-## 📂 Project Structure
-
-```
+```text
 Snake-Game-Player/
-│
-├── Snake Game/
-│   ├── main.c
-│   ├── lcddrv.c
-│   ├── config.h
-│   ├── target.c
-│   ├── Startup.s
-│   └── ...
-│
 ├── README.md
+├── Embedded System Course Design_1911521213_王一然.pdf
+└── Snake Game/
+    ├── main.c                   # Game state, snake movement, keypad logic
+    ├── lcddrv.c                 # Graphical LCD driver routines
+    ├── lcddrv.h
+    ├── config.h                 # Microcontroller and project configuration
+    ├── target.c
+    ├── target.h
+    ├── Startup.s                # ARM startup assembly
+    ├── Snake_Game.uvproj        # Keil project
+    ├── Snake_Game.uvopt
+    ├── Objects/
+    │   └── Snake_Game.hex       # Generated program image
+    └── Listings/                # Build listings and map file
 ```
 
----
+## Building the Firmware
 
-## ▶️ How to Run
+1. Open `Snake Game/Snake_Game.uvproj` in a compatible **Keil µVision** environment with LPC2124 and ARM Compiler 5 support.
+2. Check the device and target settings.
+3. Build the target to generate an updated HEX file.
+4. If you have the matching Proteus circuit, assign the HEX image to the LPC2124 component and run the simulation.
 
-1. Open the project in **Keil µVision**
-2. Compile the source files
-3. Simulate the circuit using **Proteus**
-4. Upload the program to **LPC2124**
-5. Control the snake using the **4×4 keypad**
+The included build log records a successful legacy Keil build with **0 errors and 0 warnings**. This does not establish compatibility with current toolchains or confirm that a complete Proteus circuit is available here.
 
----
+## Scope and Limitations
 
-## 🏫 Academic Information
+- The game uses an array for snake segments; a linked-list implementation is **not** present.
+- The programmed behavior includes screen-edge wrapping, so boundaries are not treated as game-over collisions.
+- The source uses low-level peripheral code and requires a correctly configured LPC2124/LCD/keypad setup.
+- The simulation design file, exact component wiring, and independent runtime test results are not included in this repository.
+- The code is preserved as educational embedded-systems coursework, not as a portable PC game or production firmware.
 
-* **Course:** Embedded System Course Design
-* **Department:** Computer Science & Technology
-* **University:** Hubei University of Technology
-* **Instructor:** Dr. Liu Chun
-* **Student:** Muntasir Md Fahim (王一然)
+## Academic Information
 
----
+- **Course:** Embedded System Course Design
+- **Department:** Computer Science and Technology
+- **University:** Hubei University of Technology
+- **Instructor:** Dr. Liu Chun
+- **Student:** Muntasir Md Fahim (王一然)
+- **Documentation:** [Embedded System Course Design Report](Embedded%20System%20Course%20Design_1911521213_%E7%8E%8B%E4%B8%80%E7%84%B6.pdf)
 
-## 📜 License
+## References and Acknowledgments
 
-This project is created for **educational and academic purposes**.
-Feel free to study, modify, and improve it with proper credit.
+The project combines embedded-programming examples, supporting microcontroller/LCD code, and course-specific configuration and simulation work. Some routines were adapted from existing educational sources whose original links are no longer available.
 
----
+The source files retain earlier author and copyright notices. In particular, `config.h` and `target.h` identify **Guangzhou ZLG-MCU Development Co., Ltd.** and **Chen Mingji** in their historical headers. Those notices should be preserved when reusing the files.
+
+This repository is shared for **academic documentation and learning**. No blanket reuse license is granted for third-party material without confirmation of its original terms.
