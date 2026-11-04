@@ -92,7 +92,7 @@ The included build log records a successful legacy Keil build with **0 errors an
 - **Department:** Computer Science and Technology
 - **University:** Hubei University of Technology
 - **Instructor:** Dr. Liu Chun
-- **Student:** Muntasir Md Fahim (王一然)
+- **Student:** Muntasir Md Fahim 
 - **Documentation:** [Embedded System Course Design Report](Embedded%20System%20Course%20Design_1911521213_%E7%8E%8B%E4%B8%80%E7%84%B6.pdf)
 
 ## References and Acknowledgments
